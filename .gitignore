@@ -1,0 +1,52 @@
+# Compiled code
+*.class
+*.o
+*.out
+*.so
+
+# Archives
+*.zip
+*.tar.gz
+*.rar
+
+# Backup files
+*~
+*.bak
+*.swp
+
+# System files
+.DS_Store
+Thumbs.db
+
+
+# Byte-compiled / cache files
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual environments
+venv/
+env/
+.venv/
+ENV/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# IDE/editor settings
+.vscode/
+.idea/
+
+# Logs and databases
+*.log
+*.sqlite3
+*.db
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Ignore custom project directories
+data/
+image/
+output/
