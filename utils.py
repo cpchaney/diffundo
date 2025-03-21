@@ -30,6 +30,13 @@ Author: Christopher Chaney
 import torch
 
 
+def keep_topk_elements(tensor, k):
+    _, topk_indices = torch.topk(tensor, k=k, dim=1)
+    mask = torch.zeros_like(tensor, dtype=torch.bool)
+    mask.scatter_(1, topk_indices, True)
+    return tensor * mask
+
+
 def get_distance_matrix(input_tensor):
     """
     Computes the pairwise Euclidean distance matrix for a set of input points.
