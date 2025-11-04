@@ -37,6 +37,12 @@ ENV/
 .vscode/
 .idea/
 
+# Packaging artifacts
+*.egg-info/
+diffundo.egg-info/
+build/
+dist/
+
 # Logs and databases
 *.log
 *.sqlite3
