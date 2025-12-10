@@ -2,6 +2,36 @@ import numpy as np
 from sklearn.decomposition import PCA
 
 
+def fit_pca_on_reference(adata, genes, n_components=50, layer="logcounts"):
+    """
+    Fit PCA to reference AnnData and store model in .uns["pca_model"].
+    """
+    X_raw = adata[:, genes].layers[layer]
+    # Convert sparse matrix to dense
+    if not isinstance(X_raw, np.ndarray):
+        X_raw = X_raw.toarray()
+
+    # Standardize
+    mean = X_raw.mean(axis=0)
+    std = X_raw.std(axis=0)
+    std[std == 0] = 1
+
+    # Prevent division by zero
+    X = (X_raw - mean) / std
+
+    # Fit PCA
+    pca = PCA(n_components=n_components)
+    pca_scores = pca.fit_transform(X)
+    adata.obsm["X_pca"] = pca_scores
+
+    adata.uns["pca_model"] = {
+        "mean": mean.tolist(),
+        "std": std.tolist(),
+        "components": pca.components_.tolist(),
+        "genes": genes,
+    }
+
+
 def project_to_reference_pca(
     adata,
     pca_model: dict,
